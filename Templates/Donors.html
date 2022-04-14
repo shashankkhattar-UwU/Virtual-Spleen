@@ -1,0 +1,78 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+    Donors
+{% endblock title %}
+
+{% block content %}
+{% with messages=get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class='flash'>{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<div class="maindiv">
+    <center>
+        <h2>Donors</h2>
+            <table>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Blood Group
+                    </th>
+                    <th>
+                        Age
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Disease History
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+                {% for donor in donors %}
+                <tr class={{ "expired" if donor[6] else "normal" }} >
+                    <td>
+                        {{donor[1]}}
+                    </td>
+                    <td>
+                        {{donor[7]}}
+                    </td>
+                    <td>
+                        {{donor[2]}}
+                    </td>
+                    <td>
+                        {{donor[3]}}
+                    </td>
+                    <td>
+                        {{donor[4]}}
+                    </td>
+                    <td>
+                        {{donor[8]}}
+                    </td>
+                    <td>
+                        {% if donor[6] %}
+                            <a class="btn btn-primary btn-lg btn-block" href={{url_for('transactionfor', using="donor", id=donor[0])}}>Show Transaction</a>
+                        {% else %}
+                            <a class="btn btn-primary btn-lg btn-block" href={{url_for('editdonorform', id=donor[0])}}>Edit</a>
+                            <a class="btn btn-danger btn-lg btn-block" href={{url_for('delete', person='donor', id=donor[0])}}>Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <h2>Donors highlighted with Red borders have already donated blood</h2>
+    </center>
+    </div>
+
+{% endblock content %}

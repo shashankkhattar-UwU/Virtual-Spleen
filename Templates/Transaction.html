@@ -1,0 +1,31 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+    Transaction {{transaction[9]}}
+{% endblock title %}
+
+{% block content %}
+    <center>
+        <h2>
+            Transaction on {{transaction[8]}}
+        </h2>
+    </center>
+    <div class="transactiondetail">
+        <div class="detailcard">
+            <b>Request by:</b> {{transaction[0]}} <br>
+            <b>Blood Group:</b> {{transaction[1]}}<br>
+            <b>Request Id:</b> {{transaction[3]}}<br>
+            <b>Reason:</b> {{transaction[2]}}<br>
+        </div>
+        <div class='detailcard'>
+            <b>Donated by:</b> {{transaction[4]}}<br>
+            <b>Blood Group:</b> {{transaction[5]}}<br>
+            <b>Donor Id:</b> {{transaction[6]}}<br>
+        </div>
+    </div>
+    <center>
+        <h2>
+            <b>City: </b>{{transaction[7]}}
+        </h2>
+    </center>
+{% endblock content %}

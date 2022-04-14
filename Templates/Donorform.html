@@ -1,0 +1,56 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+
+    {{'Add' if action=='add' else 'Edit'}} Donor
+{% endblock title %}
+
+{% block content %}
+
+    {% with messages=get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class='flash'>message</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <center>
+        <h2>
+            {{'Add a' if action=='add' else 'Edit'}} Donor
+        </h2>
+        <div class='form'>
+            <form action={{url_for('donorform') if action=='add' else url_for('editdonorform', id=donor[0])}} method="post">
+                <b>Name:  </b><br> <input class='textfield' type="text" name="name" required value="{{donor[1]}}"><br>
+                <b>Gender:  </b><br> <select name="gender" id="" >
+                    <option value="male" {{'selected' if donor[3]=='male'}} >male</option>
+                    <option value="female" {{'selected' if donor[3]=='female'}}>female</option>
+                    <option value="other" {{'selected' if donor[3]=='other'}}>other</option>
+                </select> <br>
+                <b>Age:  </b><br> <input type="number" required class='textfield' name="age" min='16' value="{{donor[2]}}"><br>
+                <b>City:  </b><br> <select name="city">
+                    {% for city in cities %}
+                    <option value={{city[0]}} {{'selected' if donor[8]==city[0]}}>{{city[0]}}</option>
+                    {% endfor %}
+                  </select><br>
+                  <b>Blood Group: </b><br> <select name="bloodgroup" id="">
+                    <option value="A" {{'selected' if donor[7][0]=='A'}}>A</option>
+                    <option value="B" {{'selected' if donor[7][0]=='B'}}>B</option>
+                    <option value="AB" {{'selected' if donor[7][0:2]=='AB'}}>AB</option>
+                    <option value="O" {{'selected' if donor[7][0]=='O'}}>O</option>
+                </select> 
+                <select name="rh" id="">
+                    <option value="+" {{'selected' if donor[7][-1]=='+'}}>+</option>
+                    <option value="-" {{'selected' if donor[7][-1]=='-'}}>-</option>
+                </select><br>
+                <b>Disease History: </b>(Leave empty if none)<br>
+                <textarea name="diseases" id="" cols="100" rows="7" >{{donor[4]}}</textarea>
+                <br><br>
+                <center>
+                    <input type="submit" class="btn btn-primary">
+                    <input type="reset" value="Clear" class="btn btn-secondary">
+                </center>
+            </form>
+        </div>
+    </center>
+{% endblock content %}

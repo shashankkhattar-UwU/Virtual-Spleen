@@ -1,0 +1,83 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+    Requests
+{% endblock title %}
+
+{% block content %}
+{% with messages=get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class='flash'>{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<div class="maindiv">
+    <center>
+        <h2>Requests</h2>
+            <table>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Blood Group
+                    </th>
+                    <th>
+                        Age
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Reason
+                    </th>
+                    <th>
+                        Disease History
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+                {% for request in requests %}
+                <tr class={{ "expired" if request[7] else "normal" }} >
+                    <td>
+                        {{request[1]}}
+                    </td>
+                    <td>
+                        {{request[8]}}
+                    </td>
+                    <td>
+                        {{request[2]}}
+                    </td>
+                    <td>
+                        {{request[3]}}
+                    </td>
+                    <td>
+                        {{request[5]}}
+                    </td>
+                    <td>
+                        {{request[4]}}
+                    </td>
+                    <td>
+                        {{request[9]}}
+                    </td>
+                    <td>
+                        {% if request[7] %}
+                        <a class="btn btn-primary btn-lg btn-block" href={{url_for('transactionfor',using="reciepient", id=request[0])}}>Show Transaction</a>
+                        {% else %}
+                        <a class="btn btn-primary btn-lg btn-block" href={{url_for('requestmatch', id=request[0])}}>Show Matches</a>
+                        <a class="btn btn-primary btn-lg btn-block" href={{url_for('editrequestform', id=request[0])}}>Edit</a>
+                        <a class="btn btn-danger btn-lg btn-block" href={{url_for('delete', person='reciepient', id=request[0])}}>Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <h2>Requests highlighted with Red borders have already recieved blood</h2>
+    </center>
+
+{% endblock content %}

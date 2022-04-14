@@ -1,0 +1,15 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+    Blood Bank Management System
+{% endblock title %}
+
+{% block content %}
+    <div class="maindiv">
+        <a class="btn btn-primary btn-lg btn-block homebutton" href={{url_for('donors')}}>View All Donors</a>
+        <a class="btn btn-primary btn-lg btn-block homebutton" href={{url_for('requests')}}>View All Requests</a>
+        <a class="btn btn-primary btn-lg btn-block homebutton" href={{url_for('donorform')}}>Add Donor</a>
+        <a class="btn btn-primary btn-lg btn-block homebutton" href={{url_for('requestform')}}>Add Request</a>
+        <a class="btn btn-primary btn-lg btn-block homebutton" href={{url_for('transactions')}}>View All Transactions</a>
+    </div>
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+    {{request[1]}}
+{% endblock title %}
+
+{% block content %}
+<div class="transactiondetail">
+    <div class="detailcard">
+        <b>Request by:</b> {{request[1]}} <br>
+        <b>Blood Group:</b> {{request[8]}}<br>
+        <b>Age:</b> {{request[2]}}<br>
+        <b>Gender:</b> {{request[3]}}<br>
+        <b>Request Id:</b> {{request[0]}}<br>
+        <b>Reason:</b> {{request[5]}}<br>
+        <b>Disease History:</b> {{request[4]}}<br>
+        <b>City:</b> {{request[9]}} <br>
+        <b>Registration Date: </b> {{request[6]}} <br>
+    </div>
+    <div>
+        <table>
+            <tr>
+
+                <th>
+                    Name
+                </th>
+                <th>
+                    Blood Group
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Disease History
+                </th>
+            </tr>
+            {% for donor in donors %}
+                <tr class='normal' >
+                    <td>
+                        {{donor[1]}}
+                    </td>
+                    <td>
+                        {{donor[2]}}
+                    </td>
+                    <td>
+                        {{donor[3]}}
+                    </td>
+                    <td>
+                        {{donor[4]}}
+                    </td>
+                    <td>
+                        {{donor[5]}}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg btn-block" href={{url_for('createtransaction', d_id=donor[0], r_id=request[0])}}>Confirm Transaction</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}
